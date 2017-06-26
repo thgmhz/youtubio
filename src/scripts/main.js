@@ -1,8 +1,11 @@
 const getVideoId = url =>
   url.match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/)[1]
 
-const download = tab => {
-  const id = getVideoId(tab.url)
-}
-
-chrome.browserAction.onClicked.addListener(download)
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (message.popupIsOpen) {
+    chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, (tabs) => {
+      const youtubeId = getVideoId(tabs[0].url)
+      chrome.runtime.sendMessage({ youtubeId })
+    })
+  }
+})

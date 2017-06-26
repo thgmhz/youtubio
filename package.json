@@ -17,7 +17,9 @@
   "scripts": {
     "start": "yarn build",
     "build": "yarn build:scripts && yarn build:styles && yarn build:images && yarn build:html",
-    "build:scripts": "browserify src/scripts/main.js -t [ babelify --presets es2015 ] -o dist/scripts/main.js",
+    "build:scripts": "yarn build:main && yarn build:popup",
+    "build:main": "browserify src/scripts/main.js -t [ babelify --presets es2015 ] -o dist/scripts/main.js",
+    "build:popup": "browserify src/scripts/popup.js -t [ babelify --presets es2015 ] -o dist/scripts/popup.js",
     "build:styles": "node-sass src/styles/main.scss dist/styles/main.css -q --include-path node_modules",
     "build:images": "cp -r src/images dist/",
     "build:html": "cp src/*.html dist/",

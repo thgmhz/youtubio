@@ -1,14 +1,17 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-"use strict";
+'use strict';
 
 var getVideoId = function getVideoId(url) {
   return url.match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/)[1];
 };
 
-var download = function download(tab) {
-  var id = getVideoId(tab.url);
-};
-
-chrome.browserAction.onClicked.addListener(download);
+chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
+  if (message.popupIsOpen) {
+    chrome.tabs.query({ 'active': true, 'lastFocusedWindow': true }, function (tabs) {
+      var youtubeId = getVideoId(tabs[0].url);
+      chrome.runtime.sendMessage({ youtubeId: youtubeId });
+    });
+  }
+});
 
 },{}]},{},[1]);
