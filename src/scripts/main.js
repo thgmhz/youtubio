@@ -1,14 +1,8 @@
-const fs = require('fs')
-const ytdl = require('ytdl-core')
+const getVideoId = url =>
+  url.match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/)[1]
 
-const options = {
-  quality: 'highest',
-  downloadURL: true,
-  filter: 'audioonly'
+const download = tab => {
+  const id = getVideoId(tab.url)
 }
 
-const stream = ytdl('https://www.youtube.com/watch?v=CHekNnySAfM', options)
-
-stream.on('info', (info, format) => {
-  stream.pipe(fs.createWriteStream(`${info.title}.mp3`))
-})
+chrome.browserAction.onClicked.addListener(download)
