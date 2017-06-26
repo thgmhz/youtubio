@@ -15,11 +15,13 @@
     "node-sass": "3.7.0"
   },
   "scripts": {
-    "start": "npm run build",
-    "build": "npm run build:scripts && npm run build:styles",
+    "start": "yarn build",
+    "build": "yarn build:scripts && yarn build:styles && yarn build:images && yarn build:html",
     "build:scripts": "browserify src/scripts/main.js -t [ babelify --presets es2015 ] -o dist/scripts/main.js",
     "build:styles": "node-sass src/styles/main.scss dist/styles/main.css -q --include-path node_modules",
-    "package": "npm run package:blink && npm run package:gecko",
+    "build:images": "cp -r src/images dist/",
+    "build:html": "cp src/*.html dist/",
+    "package": "yarn package:blink && yarn package:gecko",
     "package:blink": "cd dist && zip -r ../codecopy.zip * && cd ..",
     "package:gecko": "cd dist && zip -r ../codecopy.xpi * && cd .."
   }
