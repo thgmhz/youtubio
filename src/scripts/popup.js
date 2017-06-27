@@ -1,4 +1,6 @@
 const youtubio = {
+  serverUrl: 'http://youtubio-server.herokuapp.com',
+
   init: function () {
     chrome.runtime.sendMessage({ popupIsOpen: true })
     this.cacheSelectors()
@@ -17,7 +19,7 @@ const youtubio = {
     onMessage: function (message, sender, sendResponse) {
       const self = youtubio
       if (message.youtubeId) {
-        self.link.href = `http://localhost:8888/convert/${message.youtubeId}`
+        self.link.href = `${self.serverUrl}/convert/${message.youtubeId}`
         self.body.appendChild(self.link)
         setTimeout(() => {
           const youtubioLink = document.getElementById('youtubio-link')

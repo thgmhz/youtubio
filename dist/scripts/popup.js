@@ -2,6 +2,8 @@
 'use strict';
 
 var youtubio = {
+  serverUrl: 'http://youtubio-server.herokuapp.com',
+
   init: function init() {
     chrome.runtime.sendMessage({ popupIsOpen: true });
     this.cacheSelectors();
@@ -20,12 +22,11 @@ var youtubio = {
     onMessage: function onMessage(message, sender, sendResponse) {
       var self = youtubio;
       if (message.youtubeId) {
-        self.link.href = 'http://localhost:8888/convert/' + message.youtubeId;
+        self.link.href = self.serverUrl + '/convert/' + message.youtubeId;
         self.body.appendChild(self.link);
         setTimeout(function () {
           var youtubioLink = document.getElementById('youtubio-link');
           youtubioLink.click();
-          // setTimeout(() => window.close(), 3000)
         }, 500);
       }
     }
