@@ -1,0 +1,9 @@
+.wait {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 20px 60px;
+  background: rgba(0,0,0,0.9);
+  color: #FFF;
+  text-align: center;
+}

@@ -2,29 +2,12 @@
   "name": "youtubio",
   "version": "1.0.0",
   "description": "",
-  "main": "src/scripts/main.js",
   "repository": "thiagommedeiros/youtubio",
   "license": "MIT",
   "dependencies": {
     "ytdl-core": "^0.14.4"
   },
-  "devDependencies": {
-    "babel-preset-es2015": "6.9.0",
-    "babelify": "7.3.0",
-    "browserify": "13.0.1",
-    "node-sass": "3.7.0"
-  },
   "scripts": {
-    "start": "yarn build",
-    "build": "yarn build:scripts && yarn build:styles && yarn build:images && yarn build:html",
-    "build:scripts": "yarn build:main && yarn build:popup",
-    "build:main": "browserify src/scripts/main.js -t [ babelify --presets es2015 ] -o dist/scripts/main.js",
-    "build:popup": "browserify src/scripts/popup.js -t [ babelify --presets es2015 ] -o dist/scripts/popup.js",
-    "build:styles": "node-sass src/styles/main.scss dist/styles/main.css -q --include-path node_modules",
-    "build:images": "cp -r src/images dist/",
-    "build:html": "cp src/*.html dist/",
-    "package": "yarn package:blink && yarn package:gecko",
-    "package:blink": "cd dist && zip -r ../codecopy.zip * && cd ..",
-    "package:gecko": "cd dist && zip -r ../codecopy.xpi * && cd .."
+    "package": "cd src && zip -r ../codecopy.zip * && cd .."
   }
 }

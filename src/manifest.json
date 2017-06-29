@@ -7,10 +7,15 @@
   "author": "Thiago M. Medeiros",
   "browser_action": {
    "default_icon": "images/icon-mp3.png",
-   "default_popup": "popup.html"
+   "default_title": "Convert a video from Youtube to MP3"
+  },
+  "icons": {
+    "16": "images/icon-mp3.png",
+    "48": "images/icon-mp3.png",
+    "128": "images/icon-mp3.png"
   },
   "background": {
     "scripts": ["scripts/main.js"]
   },
-  "permissions": ["tabs"]
+  "permissions": ["tabs","activeTab","http://*/*"]
 }
